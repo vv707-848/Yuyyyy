@@ -1,258 +1,2127 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    :root {
+      /* الخط الأساسي */
+      --font-family: 'Cairo', sans-serif;
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    direction: rtl;
-}
+      /* الألوان الأساسية */
+      --primary-color: #0f4c81; /* لون رئيسي أزرق داكن */
+      --primary-light: #e8f1f8;
+      --primary-dark: #0a3a5c;
+      --secondary-color: #f5f7fa;
+      --accent-color: #22b573; /* لون أخضر أكثر إشراقًا */
+      --accent-light: #e6f8f0;
+      --accent-dark: #17864d;
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+      /* ألوان النصوص والحدود */
+      --dark-text: #344767;
+      --light-text: #667085;
+      --border-color: #e1e8ee;
 
-.header {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 2rem 0;
-    text-align: center;
-    color: white;
-    margin-bottom: 2rem;
-}
+      /* ألوان الهيدر */
+      --header-gradient: linear-gradient(135deg, #0f4c81, #154c75);
+      --header-text-color: #fff;
 
-.header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
+      /* ألوان شارات العقارات */
+      --featured-badge: #ff9500;
+      --exclusive-badge: #8a2be2;
+      --new-badge: #22b573;
+      --type-sale-badge: #4caf50;
+      --type-rent-badge: #2196f3;
+      --pinned-badge: #22b573;
 
-.header p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
+      /* ألوان العقارات والبطاقات */
+      --property-overlay-gradient: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+      --property-feature-separator: rgba(0,0,0,0.1);
+      --property-feature-highlight: rgba(34, 181, 115, 0.1);
+      --property-footer-bg: rgba(245, 247, 250, 0.7);
 
-.filters {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-}
+      /* تأثيرات الأزرار */
+      --btn-glow-primary: rgba(15, 76, 129, 0.25);
+      --btn-glow-accent: rgba(34, 181, 115, 0.25);
+      --btn-glow-whatsapp: rgba(37, 211, 102, 0.25);
+      --btn-hover-effect: rgba(255, 255, 255, 0.15);
 
-.filters select,
-.filters input {
-    padding: 12px 15px;
-    border: none;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.9);
-    font-size: 1rem;
-    min-width: 200px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.filters select:focus,
-.filters input:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
-}
-
-.properties-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
-    padding-bottom: 2rem;
-}
-
-.property-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-}
-
-.property-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.property-image {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-}
-
-.property-content {
-    padding: 1.5rem;
-}
-
-.property-title {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 0.5rem;
-}
-
-.property-location {
-    color: #666;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.property-location::before {
-    content: "📍";
-}
-
-.property-category {
-    display: inline-block;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    padding: 0.3rem 1rem;
-    border-radius: 15px;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
-
-.property-price {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #2c5530;
-    text-align: center;
-    background: linear-gradient(135deg, #a8e6cf, #88d8a3);
-    padding: 0.8rem;
-    border-radius: 10px;
-    margin-top: 1rem;
-}
-
-.property-description {
-    color: #555;
-    line-height: 1.6;
-    margin: 1rem 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
-    background-color: white;
-    margin: 5% auto;
-    padding: 2rem;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 800px;
-    max-height: 80%;
-    overflow-y: auto;
-    position: relative;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-.close {
-    color: #aaa;
-    float: left;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    left: 20px;
-    top: 15px;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-}
-
-.modal-image {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 15px;
-    margin-bottom: 1rem;
-}
-
-.modal-title {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.modal-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    margin: 1rem 0;
-}
-
-.modal-detail-item {
-    background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.modal-description {
-    line-height: 1.8;
-    color: #555;
-    margin: 1.5rem 0;
-    white-space: pre-line;
-}
-
-.no-results {
-    text-align: center;
-    color: white;
-    font-size: 1.2rem;
-    margin: 3rem 0;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-}
-
-@media (max-width: 768px) {
-    .header h1 {
-        font-size: 2rem;
+      /* أنماط الحواف والظلال والتأثيرات العامة */
+      --radius-sm: 6px;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 6px rgba(0,0,0,0.05);
+      --shadow: 0 5px 15px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 25px rgba(15,76,129,0.12);
+      --transition: all 0.35s ease;
     }
     
-    .filters {
-        flex-direction: column;
+        /* ===== تصميم بطاقات العقار المحسنة ===== */
+    
+    /* تصميم البطاقة الأساسي - بسيط واحترافي */
+    .real-estate-card {
+      position: relative;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0, 0, 0, 0.03);
     }
     
-    .filters select,
-    .filters input {
-        min-width: 100%;
+    .real-estate-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
     
-    .properties-grid {
-        grid-template-columns: 1fr;
+    /* بطاقة مميزة */
+    .featured-property {
+      border: 2px solid var(--featured-badge);
+      box-shadow: 0 10px 25px rgba(255, 149, 0, 0.15);
     }
     
+    /* تصميم صورة العقار */
+    .card-image-container {
+      position: relative;
+      overflow: hidden;
+      height: 180px;
+    }
+    
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    
+    .real-estate-card:hover .card-image {
+      transform: scale(1.05);
+    }
+    
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.5) 100%);
+      z-index: 1;
+    }
+    
+    /* تصميم شارات ووصف العقار */
+    .property-label {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      border-radius: 30px;
+      padding: 6px 12px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+    
+    .property-label:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .sale-label {
+      background: var(--type-sale-badge);
+      color: white;
+    }
+    
+    .rent-label {
+      background: var(--type-rent-badge);
+      color: white;
+    }
+    
+    .property-price {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--primary-color);
+      padding: 8px 15px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+    
+    .property-price i {
+      color: var(--accent-color);
+    }
+    
+    .badge-container {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .property-badge {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .property-badge:hover {
+      transform: translateY(-2px) scale(1.05);
+    }
+    
+    .badge-premium {
+      background: linear-gradient(135deg, #ff9500, #ff7800);
+      color: white;
+    }
+    
+    .badge-exclusive {
+      background: linear-gradient(135deg, #8a2be2, #663399);
+      color: white;
+    }
+    
+    .badge-pinned {
+      background: linear-gradient(135deg, #22b573, #18a065);
+      color: white;
+    }
+    
+    @keyframes badgePulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    /* محتوى البطاقة */
+    .card-content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      background: #ffffff;
+    }
+    
+    .property-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 0;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color 0.3s ease;
+    }
+    
+    .real-estate-card:hover .property-title {
+      color: var(--primary-color);
+    }
+    
+    .property-address {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+      color: var(--light-text);
+    }
+    
+    .location-icon {
+      color: var(--accent-color);
+    }
+    
+    .property-features {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding: 12px;
+      background-color: var(--secondary-color);
+      border-radius: 12px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+    }
+    
+    .feature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.85rem;
+      background-color: rgba(255,255,255,0.7);
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .feature:hover {
+      background-color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    
+    .feature i {
+      color: var(--primary-color);
+      font-size: 1rem;
+    }
+    
+    .property-category {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      font-size: 0.85rem;
+      color: var(--light-text);
+      background-color: var(--primary-light);
+      padding: 8px 12px;
+      border-radius: 20px;
+      width: fit-content;
+    }
+    
+    .property-category i {
+      color: var(--primary-color);
+    }
+    
+    /* أزرار التفاعل */
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 15px;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .action-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      flex-grow: 1;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: none;
+    }
+    
+    .whatsapp-button {
+      background-color: #25D366;
+      color: white;
+    }
+    
+    .whatsapp-button:hover {
+      background-color: #1aae54;
+      box-shadow: 0 4px 10px rgba(37, 211, 102, 0.25);
+      transform: translateY(-2px);
+    }
+    
+    .details-button {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .details-button:hover {
+      background-color: var(--primary-dark);
+      box-shadow: 0 4px 10px rgba(15, 76, 129, 0.25);
+      transform: translateY(-2px);
+    }
+    
+    /* أزرار سريعة على الصورة */
+    .property-quick-actions {
+      position: absolute;
+      top: 15px;
+      right: -40px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 5;
+      transition: right 0.3s ease;
+    }
+    
+    .real-estate-card:hover .property-quick-actions {
+      right: 15px;
+    }
+    
+    .quick-action-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: white;
+      border: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--dark-text);
+    }
+    
+    .quick-action-btn:hover {
+      transform: scale(1.1);
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+    }
+    
+    .quick-action-btn.favorite-btn.active {
+      background-color: #ff3366;
+      color: white;
+    }
+    
+    /* تأثير النبض للأزرار */
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+      }
+    }
+    
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--secondary-color);
+      margin: 0;
+      padding-top: 80px;
+      color: var(--dark-text);
+      line-height: 1.6;
+    }
+
+    /* ====== الهيدر وشريط التنقل ====== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--header-gradient);
+      padding: 10px 0;
+      box-shadow: var(--shadow);
+      z-index: 1100;
+      color: var(--header-text-color);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon-container {
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .header-logo-icon {
+      font-size: 1.4rem;
+      color: var(--primary-color);
+    }
+
+    .header-container h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #ffffff, #e0e8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .login-btn {
+      background-color: #fff;
+      color: var(--primary-color);
+      border: none;
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+      background-color: #f8f9fa;
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .search-btn {
+      background-color: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      border-radius: 50px;
+      padding: 8px 18px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.95rem;
+    }
+
+    .search-btn:hover {
+      background-color: rgba(255,255,255,0.25);
+    }
+
+    #visitorCount {
+      font-size: 0.85rem;
+      background: rgba(255,255,255,0.1);
+      padding: 5px 15px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* ====== لوحة تسجيل الدخول ====== */
+    #loginPanel {
+      display: none;
+      position: fixed;
+      top: 85px;
+      right: 20px;
+      width: 320px;
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 25px;
+      box-shadow: var(--shadow-lg);
+      z-index: 2000;
+      border: 1px solid var(--border-color);
+    }
+
+    #loginPanel h5 {
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 1.3rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    #loginPanel h5::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background-color: var(--accent-color);
+      border-radius: 3px;
+    }
+
+    /* ====== صفحة الإدارة ====== */
+    #adminPanel {
+      display: none;
+      background: #fff;
+      padding: 30px;
+      border-radius: var(--radius);
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      box-shadow: var(--shadow);
+    }
+
+    /* لوحة الإدارة المحسنة */
+    .admin-header {
+      background-color: var(--primary-light);
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .admin-stats {
+      margin-top: 15px;
+      gap: 15px;
+    }
+
+    .stat-box {
+      background-color: white;
+      border-radius: 8px;
+      padding: 15px;
+      min-width: 120px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      flex: 1;
+    }
+
+    .stat-box i {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .stat-box .counter {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--dark-text);
+      display: block;
+    }
+
+    .stat-box .label {
+      color: var(--light-text);
+      font-size: 0.85rem;
+      display: block;
+    }
+
+    /* نموذج إضافة العقارات */
+    .admin-form-container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .form-header {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    .badge-section, .image-section, .description-section {
+      background-color: var(--secondary-color);
+      border-radius: 8px;
+    }
+
+    .badge-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .badge-option {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .featured-badge {
+      color: var(--featured-badge);
+    }
+
+    .exclusive-badge {
+      color: var(--exclusive-badge);
+    }
+
+    .pinned-badge {
+      color: var(--type-sale-badge);
+    }
+
+    /* جدول العقارات */
+    .properties-table-container {
+      background-color: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .admin-table thead {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .admin-table th {
+      font-weight: 600;
+      padding: 12px 10px;
+    }
+
+    .admin-table tbody tr:hover {
+      background-color: var(--primary-light);
+    }
+
+    /* تصميم مصغرات الصور في جدول العقارات */
+    .property-image-thumb {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--secondary-color);
+      border: 1px solid var(--border-color);
+    }
+
+    .property-image-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .no-image-thumb {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--secondary-color);
+      border: 1px solid var(--border-color);
+      color: var(--light-text);
+      font-size: 1.2rem;
+    }
+
+    /* تصميم الشارات في الجدول */
+    .property-type-badge, .property-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* تصميم أزرار الإجراءات */
+    .action-buttons {
+      display: flex;
+      gap: 5px;
+    }
+
+    .action-btn {
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: transform 0.2s;
+    }
+
+    .action-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* أنماط شارات حالة الإعلانات */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .status-badge:before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-left: 5px;
+    }
+
+    .status-badge.pending {
+      background-color: #fff8e1;
+      color: #FF9800;
+      border: 1px solid #FFE082;
+    }
+
+    .status-badge.pending:before {
+      background-color: #FF9800;
+    }
+
+    .status-badge.approved {
+      background-color: #e8f5e9;
+      color: #4CAF50;
+      border: 1px solid #A5D6A7;
+    }
+
+    .status-badge.approved:before {
+      background-color: #4CAF50;
+    }
+
+    .status-badge.rejected {
+      background-color: #ffebee;
+      color: #F44336;
+      border: 1px solid #FFCDD2;
+    }
+
+    .status-badge.rejected:before {
+      background-color: #F44336;
+    }
+
+    /* تصميم حالة فارغة */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* تنسيق التسمية النشطة في خيارات التمييز */
+    .badge-option label {
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .badge-option label:hover {
+      background-color: rgba(0,0,0,0.03);
+    }
+
+    .badge-option label.active-badge {
+      background-color: var(--primary-light);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transform: translateY(-1px);
+    }
+
+    /* تنسيق قسم معاينة الصور */
+    .preview-item {
+      display: inline-block;
+      margin: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+      width: 150px;
+      height: 150px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .preview-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .preview-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0,0,0,0.7);
+      color: white;
+      font-size: 12px;
+      padding: 5px;
+      text-align: center;
+    }
+
+    /* تنسيق للحقول غير الصالحة */
+    .form-control.is-invalid {
+      border-color: #dc3545;
+      padding-right: calc(1.5em + 0.75rem);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right calc(0.375em + 0.1875rem) center;
+      background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    }
+
+    .invalid-feedback {
+      display: block;
+      width: 100%;
+      margin-top: 0.25rem;
+      font-size: 80%;
+      color: #dc3545;
+    }
+
+    .nav-tabs .nav-link {
+      color: var(--light-text);
+      border: none;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+    }
+
+    .nav-tabs .nav-link.active {
+      color: var(--primary-color);
+      background-color: var(--primary-light);
+      border-bottom: 3px solid var(--primary-color);
+    }
+
+    .nav-tabs .nav-link i {
+      margin-right: 8px;
+      color: inherit;
+    }
+
+    /* ====== عناصر النموذج ====== */
+    .form-control, .form-select {
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      color: var(--dark-text);
+      font-size: 0.95rem;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.1);
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: var(--dark-text);
+      margin-bottom: 10px;
+    }
+
+    /* ====== قسم الرئيسية (Hero) ====== */
+    .hero-section {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1515263487990-61b07816b324?w=1600&auto=format') center/cover no-repeat;
+      min-height: 500px;
+      margin-top: 0;
+      margin-bottom: 30px;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      overflow: visible;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 20px;
+    }
+
+    .hero-content h2 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      font-weight: 800;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      line-height: 1.2;
+    }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    /* ====== قسم البحث المتقدم ====== */
+    .search-box {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 25px;
+      margin-top: -80px;
+      position: relative;
+      z-index: 10;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 40px;
+    }
+
+    .search-box-title {
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-box-title i {
+      color: var(--accent-color);
+    }
+
+    .search-advanced-toggle {
+      color: var(--primary-color);
+      background-color: var(--primary-light);
+      border: none;
+      font-size: 0.9rem;
+      padding: 8px 15px;
+      border-radius: 50px;
+      transition: var(--transition);
+    }
+
+    .search-advanced-toggle:hover {
+      background-color: var(--primary-color);
+      color: #fff;
+    }
+
+    /* ====== البحث خيار الأقسام ====== */
+    .category-title {
+      color: var(--dark-text);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .categories-slider {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 15px 0;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      margin-bottom: 30px;
+      display: flex;
+    }
+
+    .categories-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-card {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 15px 10px;
+      min-width: 120px;
+      margin-right: 15px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .category-card.active {
+      background-color: var(--primary-light);
+      border-color: var(--primary-color);
+      box-shadow: 0 5px 15px rgba(15, 76, 129, 0.15);
+    }
+
+    .category-card.active .category-icon {
+      color: var(--primary-color);
+      background-color: #fff;
+    }
+
+    .category-card.active .category-text {
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+
+    .category-icon {
+      font-size: 1.5rem;
+      color: var(--light-text);
+      margin-bottom: 8px;
+      width: 50px;
+      height: 50px;
+      background-color: var(--secondary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .category-text {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--dark-text);
+      margin: 0;
+      white-space: normal;
+      text-align: center;
+    }
+
+    /* ====== قائمة العقارات ====== */
+    .properties-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .property-list-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark-text);
+      margin-bottom: 0;
+    }
+
+    .properties-count {
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+      font-weight: 600;
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+    }
+
+    #loadingProperties {
+      text-align: center;
+      margin: 30px 0;
+      font-size: 1.1rem;
+      color: var(--light-text);
+      padding: 25px;
+      border-radius: var(--radius);
+    }
+
+    /* ====== بطاقة العقار ====== */
+    /* تم استبدال أنماط بطاقات العقار بالأنماط الجديدة */
+
+    /* تم استبدال تأثيرات حركة بطاقات العقار بالأنماط الجديدة */
+
+    /* تم استبدال أنماط صور العقارات بالأنماط الجديدة */
+
+    .property-image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+      z-index: 1;
+    }
+
+    .property-sale-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--primary-color);
+      color: white;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-radius: 50px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    /* تأثيرات حركية للبطاقة عند المرور عليها */
+    .property-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+      opacity: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.3s ease;
+      z-index: 3;
+    }
+
+    .property-card:hover .property-overlay {
+      opacity: 1;
+    }
+
+    .property-action-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s ease 0.1s;
+    }
+
+    .property-card:hover .property-action-btn {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .property-card:hover .property-action-btn:nth-child(2) {
+      transition-delay: 0.15s;
+    }
+
+    /* أنماط شارات بطاقات العقارات */
+    .property-badges {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 6px;
+      z-index: 5;
+      max-width: 150px;
+    }
+
+    .property-badge {
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      display: inline-flex;
+      align-items: center;
+      transform: translateY(0);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .property-badge i {
+      margin-left: 5px;
+      font-size: 0.9rem;
+    }
+
+    .property-card:hover .property-badge,
+    .real-estate-card:hover .property-badge {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .badge-featured {
+      background: linear-gradient(45deg, var(--featured-badge), #e74c3c);
+    }
+
+    .badge-exclusive {
+      background: linear-gradient(45deg, var(--exclusive-badge), #9b59b6);
+    }
+
+    .badge-new {
+      background: linear-gradient(45deg, var(--new-badge), #2ecc71);
+    }
+    
+    .badge-premium {
+      background: linear-gradient(45deg, #f39c12, #f1c40f);
+    }
+
+    /* شارة تصنيف العقار */
+    .badge-category {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #fff;
+      color: var(--primary-color);
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      z-index: 5;
+      font-weight: 700;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      transform: translateY(0);
+      transition: all 0.3s ease;
+    }
+
+    .property-card:hover .badge-category {
+      transform: translateY(-3px);
+    }
+
+    /* شارة نوع العقار (بيع/إيجار) */
+    .property-type-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 1px 5px;
+      border-radius: 8px;
+      font-size: 0.5rem;
+      font-weight: 500;
+      color: white;
+      z-index: 5;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      display: inline-flex;
+      align-items: center;
+      transform: translateY(0);
+      transition: all 0.3s ease;
+      max-width: 40px;
+      text-align: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(2px);
+    }
+
+    .property-card:hover .property-type-badge {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .property-type-badge.sale {
+      background-color: var(--type-sale-badge);
+    }
+
+    .property-type-badge.rent {
+      background-color: var(--type-rent-badge);
+    }
+
+    .property-type-badge:before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.8);
+      margin-left: 2px;
+      margin-right: 2px;
+    }
+
+    .property-card .card-body {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(to bottom, rgba(26,31,44,1), rgba(20,25,35,1));
+    }
+
+    /* محتوى بطاقة العقار */
+    .property-content {
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: #fff;
+      position: relative;
+      z-index: 2;
+      border-top: none;
+    }
+
+    .property-category {
+      display: inline-block;
+      color: #ff6b6b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      position: relative;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .property-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin: 5px 0 12px;
+      color: var(--dark-text);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      letter-spacing: 0.2px;
+      text-overflow: ellipsis;
+      transition: color 0.3s ease;
+      min-height: 3rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .property-card:hover .property-title {
+      color: #ffa07a;
+    }
+
+    .property-location {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--light-text);
+      margin-bottom: 15px;
+      font-size: 0.85rem;
+      position: relative;
+    }
+
+    .property-location i {
+      color: #ff6b6b;
+      font-size: 0.95rem;
+    }
+
+    .property-price {
+      background: var(--primary-light);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 5px 0 15px;
+      font-size: 1.4rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border-left: 3px solid #ff6b6b;
+    }
+
+    .property-price::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 100%;
+      background: linear-gradient(to left, #272d3a, transparent);
+    }
+
+    .property-price small {
+      font-size: 0.75rem;
+      color: var(--light-text);
+      font-weight: 400;
+    }
+
+    .property-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 15px 0;
+      position: relative;
+      padding: 10px 0;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 8px 10px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      color: var(--dark-text);
+    }
+
+    .feature-item i {
+      color: var(--primary-color);
+      font-size: 1.05rem;
+      margin-left: 8px;
+      position: relative;
+    }
+
+    .feature-value {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .property-card:hover .feature-item i:after {
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 0.6;
+    }
+
+    .feature-item span {
+      font-weight: 700;
+      color: var(--dark-text);
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+
+    .feature-item small {
+      font-size: 0.7rem;
+      color: var(--light-text);
+      margin-top: 3px;
+    }
+
+    /* أزرار بطاقة العقار */
+    .property-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .property-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ff6b6b;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(to right, #ff6b6b, #ffa07a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .property-price small {
+      font-size: 0.75rem;
+      color: var(--light-text);
+      font-weight: 400;
+    }
+
+    .property-card .btn-details {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .property-card .btn-details:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: all 0.6s ease;
+      z-index: -1;
+    }
+
+    .property-card .btn-details:hover:before {
+      left: 100%;
+    }
+
+    .property-card .btn-details:hover {
+      background-color: var(--primary-dark);
+      box-shadow: 0 5px 15px rgba(0, 112, 74, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .property-card .btn-details i {
+      margin-right: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .property-card .btn-details:hover i {
+      transform: translateX(-3px);
+    }
+
+    .property-card .btn-whatsapp {
+      background-color: #25D366;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .property-card .btn-whatsapp i {
+      margin-right: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .property-card .btn-whatsapp:hover {
+      background-color: #128C7E;
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .property-card .btn-whatsapp:hover i {
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* ====== تفاصيل العقار ====== */
+    #propertyDetailPage {
+      display: none;
+      padding: 30px 0;
+      background-color: var(--secondary-color);
+    }
+
+    .property-detail-card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 25px;
+    }
+
+    .property-detail-header {
+      padding: 25px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .property-detail-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark-text);
+      margin-bottom: 10px;
+    }
+
+    .property-detail-badges {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .detail-badge {
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge-type-detail {
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+    }
+
+    .badge-category-detail {
+      background-color: var(--accent-light);
+      color: var(--accent-color);
+    }
+
+    .property-detail-info {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .property-detail-location {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--light-text);
+      font-size: 1rem;
+    }
+
+    .property-detail-location i {
+      color: var(--accent-color);
+    }
+
+    .property-detail-price {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .carousel-item img {
+      height: 500px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .property-detail-features {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .detail-feature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .detail-feature-icon {
+      font-size: 1.5rem;
+      color: var(--accent-color);
+      margin-bottom: 8px;
+    }
+
+    .detail-feature-value {
+      font-weight: 700;
+      color: var(--dark-text);
+      font-size: 1.1rem;
+    }
+
+    .detail-feature-name {
+      font-size: 0.9rem;
+      color: var(--light-text);
+    }
+
+    .property-detail-content {
+      padding: 25px;
+    }
+
+    .detail-section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark-text);
+      margin-bottom: 15px;
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .detail-section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--accent-color);
+      border-radius: 3px;
+    }
+
+    .description-text {
+      white-space: pre-line;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--dark-text);
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    .btn-whatsapp {
+      font-size: 1.1rem;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(45deg, #25D366, #128C7E);
+      color: white;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
+    }
+
+    .btn-whatsapp:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-whatsapp i {
+      font-size: 1.3rem;
+    }
+
+    /* ====== قسم المشاريع العقارية ====== */
+    .projects-section {
+      padding: 60px 0;
+      background-color: var(--primary-light);
+      position: relative;
+      overflow: hidden;
+      margin-top: 60px;
+    }
+
+    .projects-section::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background-color: var(--secondary-color);
+      border-radius: 0 0 50% 50% / 0 0 100% 100%;
+    }
+
+    /* تحسينات قسم المشاريع العقارية */
+    .project-image-container {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .project-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+      transition: all 0.3s ease;
+    }
+
+    .carousel-item:hover .project-overlay {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+    }
+
+    .caption-content {
+      transform: translateY(20px);
+      opacity: 0.95;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-item:hover .caption-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .projects-section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--primary-color);
+      position: relative;
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+
+    .projects-section-title span {
+      background-color: var(--accent-color);
+      color: #fff;
+      padding: 0 10px;
+      margin-left: 5px;
+      border-radius: 5px;
+    }
+
+    .project-card {
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      height: 100%;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-image {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.1);
+    }
+
+    .project-content {
+      padding: 20px;
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--dark-text);
+      margin-bottom: 10px;
+    }
+
+    .project-location {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--light-text);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .project-location i {
+      color: var(--accent-color);
+    }
+
+    .project-description {
+      color: var(--light-text);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ====== الفوتر ====== */
+    .footer {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 60px 0 20px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+      font-size: 1.8rem;
+      color: #fff;
+    }
+
+    .footer-logo h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .footer-description {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 25px;
+      line-height: 1.7;
+    }
+
+    .footer-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background-color: var(--accent-color);
+      border-radius: 3px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    .footer-links i {
+      color: var(--accent-color);
+    }
+
+    .footer-bottom {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+
+    /* ====== النوافذ المنبثقة والإشعارات ====== */
+    #toastContainer {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      z-index: 1300;
+    }
+
     .modal-content {
-        margin: 10% auto;
-        width: 95%;
-        padding: 1rem;
+      border-radius: var(--radius);
+      border: none;
+      box-shadow: var(--shadow-lg);
     }
-}
+
+    .modal-header {
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .modal-title {
+      font-weight: 700;
+    }
+
+    .modal-footer {
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* ====== الأنيميشن ====== */
+    .spin {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ====== التوافق مع الأجهزة المحمولة ====== */
+    @media (max-width: 991px) {
+      .hero-content h2 {
+        font-size: 2.2rem;
+      }
+
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+
+      .search-box {
+        margin-top: -60px;
+      }
+
+      .carousel-item img {
+        height: 400px;
+      }
+
+      .property-detail-price {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body { 
+        padding-top: 70px; 
+      }
+
+      .header-container { 
+        flex-wrap: wrap; 
+      }
+
+      .header-buttons { 
+        margin-top: 10px; 
+        width: 100%; 
+        justify-content: space-between; 
+      }
+
+      #visitorCount {
+        display: none;
+      }
+
+      .hero-section {
+        min-height: 400px;
+      }
+
+      .hero-content h2 { 
+        font-size: 1.8rem; 
+      }
+
+      .hero-content p { 
+        font-size: 1rem; 
+      }
+
+      .search-box {
+        margin-top: -40px;
+        padding: 20px 15px;
+      }
+
+      .property-image-wrapper {
+        height: 200px;
+      }
+
+      .property-card .card-body {
+        padding: 15px;
+      }
+
+      .property-card h5 {
+        font-size: 1.1rem;
+      }
+
+      .property-card .price {
+        font-size: 1.2rem;
+      }
+
+      .carousel-item img { 
+        height: 300px; 
+      }
+
+      .property-detail-title {
+        font-size: 1.5rem;
+      }
+
+      .property-detail-price {
+        font-size: 1.4rem;
+      }
+
+      .property-detail-info {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عقارات الطائف - موقع وليد</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>🏠 عقارات الطائف</h1>
+            <p>أفضل العقارات في الطائف</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="filters">
+                <select id="categoryFilter">
+                    <option value="">جميع التصنيفات</option>
+                    <option value="فلل">فلل</option>
+                    <option value="عمائر">عمائر</option>
+                    <option value="أراضي">أراضي</option>
+                    <option value="شقق">شقق</option>
+                    <option value="استراحات">استراحات</option>
+                </select>
+                
+                <input type="text" id="searchInput" placeholder="البحث في العقارات...">
+            </div>
+
+            <div id="propertiesContainer" class="properties-grid">
+                <!-- سيتم إدراج العقارات هنا بواسطة JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal لعرض تفاصيل العقار -->
+    <div id="propertyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent">
+                <!-- محتوى العقار سيظهر هنا -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
